@@ -43,6 +43,24 @@ async function run() {
       const result = await taskCollection.find(query).toArray();
       res.send(result);
     });
+    app.get("/tasks/:email/to-do", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email, status: "to-do" };
+      const result = await taskCollection.find(query).toArray();
+      res.send(result);
+    });
+    app.get("/tasks/:email/ongoing", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email, status: "ongoing" };
+      const result = await taskCollection.find(query).toArray();
+      res.send(result);
+    });
+    app.get("/tasks/:email/completed", async (req, res) => {
+      const email = req.params.email;
+      const query = { email: email, status: "completed" };
+      const result = await taskCollection.find(query).toArray();
+      res.send(result);
+    });
     app.post("/tasks", async (req, res) => {
       const info = req.body;
       const result = await taskCollection.insertOne(info);
